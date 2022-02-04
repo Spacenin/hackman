@@ -9,6 +9,6 @@ def getWord():
     parameter = {"key":line}
 
     #Get random word
-    response = requests.get("http://clemsonhackman.com/api/word", params=parameter)
+    response = requests.get("https://clemsonhackman.com/api/word", params=parameter)
 
     return(response.json()["word"])

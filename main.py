@@ -1,9 +1,11 @@
-import getWord;
+import getWord
+import game
 
 def main():
     print("Working!")
 
-    print(getWord.getWord())
+    newGame = game.Game(getWord.getWord())
+
 
 
 
