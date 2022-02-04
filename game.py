@@ -25,13 +25,14 @@ class Game:
                 letterCount += 1
 
         if letterCount == len(self.word):
-            running = False
-
-            print("You got it all right! You word was:", self.word)
+            print("You got it all right! Your word was:", self.word)
 
             return
+        
+        if self.guyStatus >= 6:
+            self.running = False
 
-        elif self.running == False:
+        if self.running == False:
             print("GAME OVER")
             print("Your word was:", self.word)
 
@@ -70,8 +71,6 @@ class Game:
             print(" __|__ ")
             print("/     \\")
 
-            self.running = False
-
             print("---YOU HAVE ONE GUESS LEFT---")
         
         print("So far you have guessed:", self.guessedLetters)
@@ -83,10 +82,14 @@ class Game:
             for i in range(len(self.word)):
                 if self.word[i] == guessedLetter:
                     self.guessedLetters[i] = guessedLetter
+
+            print("You guessed correctly!")
             
         else:
             self.guyStatus += 1
             self.wrongLetters.append(guessedLetter)
+
+            print("You guessed incorrectly!")
 
         print("\n")
 
