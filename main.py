@@ -4,7 +4,7 @@ import game
 def main():
     print("Working!")
 
-    newGame = game.Game(getWord.getWord())
+    game.gameTime(getWord.getWord())
 
 
 
