@@ -1,0 +1,12 @@
+<RCC>
+  <qresource prefix="hack">
+    <file>assets/base.png</file>
+    <file>assets/death.png</file>
+    <file>assets/five.png</file>
+    <file>assets/four.png</file>
+    <file>assets/letter-h.png</file>
+    <file>assets/one.png</file>
+    <file>assets/three.png</file>
+    <file>assets/two.png</file>
+  </qresource>
+</RCC>

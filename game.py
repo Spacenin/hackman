@@ -1,35 +1,28 @@
-import PyQt6.QtWidgets as qtw
-import PyQt6.QtGui as qtg
+import PyQt6.QtWidgets as qtw 
+import window
 import getWord
 
-#Game window class 
-class game(qtw.QWidget):
-    def __init__(self):
-        #Set up member variables
-        self.status = -1
-        self.word = getWord.getWord()
+word = getWord.getWord()
 
-        super().__init__()
+def start(app):
+    #Start up main window
+    hackGame = window.window(word)
 
-        #Set size, title, and other properties
-        self.setGeometry(0, 0, 1000, 600)
-        self.setWindowTitle("Hackman!")
-        self.setWindowIcon(qtg.QIcon("assets/letter-h.png"))
-        self.layout = qtw.QVBoxLayout()
-        self.setStyleSheet("background-color: black;")
+    app.exec()
 
-        self.draw()
-    
-    def draw(self):
-        if self.status == -1:
-            label = qtw.QLabel(self)
-            pxmap = qtg.QPixmap("assets/base.png")
-            label.setPixmap(pxmap)
-            label.setMaximumHeight(pxmap.height())
-            label.setMaximumWidth(pxmap.width())
-            self.layout.addWidget(label)
+def checkLetter(guessedSoFar, letter):
+    #Create list from guessed letters
+    listed = list(guessedSoFar)
 
-        self.show()
+    #Check if the letter is in the word
+    for i in range(len(word)):
+        if word[i] == letter:
+            listed[i] = letter
 
+    guessedSoFar = ""
 
-    
+    #Return as string
+    for i in range(len(listed)):
+        guessedSoFar += listed[i]
+
+    return(guessedSoFar)
