@@ -1,2 +1,4 @@
 key.txt
 __pycache__/
+*.ui
+*.qrc
