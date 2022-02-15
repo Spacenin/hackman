@@ -1,2 +1,6 @@
 key.txt
 __pycache__/
+build/
+dist/
+*.exe
+*.spec
