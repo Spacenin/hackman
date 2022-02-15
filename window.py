@@ -100,7 +100,7 @@ class window(qtw.QWidget):
     #Check letter entered
     def checkLetter(self):
         #Get letter entered
-        letter = self.enterLetter.text()
+        letter = self.enterLetter.text().lower()
 
         if letter == "":
             return
@@ -153,7 +153,7 @@ class window(qtw.QWidget):
     #Check if full word is right
     def checkWord(self):
         #Get word in text box
-        guessed = self.enterLetter.text()
+        guessed = self.enterLetter.text().lower()
 
         if guessed == self.word:
             self.guessedLabel.setText(guessed)
