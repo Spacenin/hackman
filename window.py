@@ -11,6 +11,7 @@ class window(qtw.QWidget):
         self.word = word
         self.score = 0
         self.status = 0
+        self.wordBonus = False
         super().__init__()
 
         #Setup fonts
@@ -41,8 +42,8 @@ class window(qtw.QWidget):
         self.imageSeen.setScaledContents(True)
 
         #Enter button
-        self.wordButton = qtw.QPushButton("^Guess letter^", self)
-        self.wordButton.clicked.connect(self.checkLetter)
+        self.wordButton = qtw.QPushButton("Guess full word", self)
+        self.wordButton.clicked.connect(self.changeTextWord)
         self.wordButton.setGeometry(qtc.QRect(170, 350, 131, 24))
         self.wordButton.setFont(font)
         self.wordButton.setAutoFillBackground(False)
@@ -127,6 +128,45 @@ class window(qtw.QWidget):
         self.checkImage()
         self.checkWon()
     
+    #Change text box to accept full words
+    def changeTextWord(self):
+        self.enterLetter.setMaxLength(100)
+        self.enterLetter.setPlaceholderText("Enter the word")
+        self.enterLetter.returnPressed.disconnect()
+        self.enterLetter.returnPressed.connect(self.checkWord)
+
+        self.wordButton.setText("Guess letters")
+        self.wordButton.clicked.disconnect()
+        self.wordButton.clicked.connect(self.changeTextLetter)
+
+    #Change text box back to letters
+    def changeTextLetter(self):
+        self.enterLetter.setMaxLength(1)
+        self.enterLetter.setPlaceholderText("Enter letter here")
+        self.enterLetter.returnPressed.disconnect()
+        self.enterLetter.returnPressed.connect(self.checkLetter)
+
+        self.wordButton.setText("Guess full word")
+        self.wordButton.clicked.disconnect()
+        self.wordButton.clicked.connect(self.changeTextWord)
+    
+    #Check if full word is right
+    def checkWord(self):
+        #Get word in text box
+        guessed = self.enterLetter.text()
+
+        if guessed == self.word:
+            self.guessedLabel.setText(guessed)
+
+            self.wordBonus = True
+
+            self.checkWon()
+
+        else:
+            self.status = 5
+
+            self.checkImage()
+    
     #Check if image needs to change
     def checkImage(self):
         #Check status and set image accordingly
@@ -172,6 +212,9 @@ class window(qtw.QWidget):
             end = time.time()
             self.score = round(numpy.reciprocal(end - self.start) * 1000)
 
+            if self.wordBonus:
+                self.score += 100
+
             #Display score
             self.scoreLabel = qtw.QLabel("--YOU WON--\nYour score: {}".format(self.score))
             self.scoreLabel.setGeometry(qtc.QRect(120, 140, 221, 221))
@@ -185,4 +228,16 @@ class window(qtw.QWidget):
             self.scoreLabel.setStyleSheet("background-color: rgb(0, 170, 0);\n"
                                         "border: 2px solid white;\n"
                                         "border-radius: 5px;")
-            self.scoreLabel.show()       
+            self.scoreLabel.show()
+
+    #Close all windows on close
+    def closeEvent(self, event):
+        try:
+            self.scoreLabel.close()
+        except AttributeError:
+            pass
+
+        try:
+            self.endLabel.close()
+        except AttributeError:
+            pass
