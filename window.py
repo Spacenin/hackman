@@ -2,11 +2,15 @@ from socketserver import ThreadingUDPServer
 from PyQt6 import QtWidgets as qtw
 from PyQt6 import QtCore as qtc
 from PyQt6 import QtGui as qtg
+import time
+import numpy
 import game
 
 class window(qtw.QWidget):
     def __init__(self, word):
         self.word = word
+        self.score = 0
+        self.status = 0
         super().__init__()
 
         #Setup fonts
@@ -88,7 +92,7 @@ class window(qtw.QWidget):
                                             "border: 2px solid white;\n"
                                             "border-radius: 5px;")
 
-        self.status = 0
+        self.start = time.time()
 
         self.show()
     
@@ -140,6 +144,21 @@ class window(qtw.QWidget):
             self.imageSeen.setPixmap(qtg.QPixmap("assets/five.png"))
 
             self.enterLetter.setReadOnly(True)
+
+            #Display game over screen
+            self.endLabel = qtw.QLabel("--GAME OVER--\nThe word was: {}".format(self.word))
+            self.endLabel.setGeometry(qtc.QRect(120, 140, 221, 221))
+            self.endLabel.setWindowTitle("LOSER")
+            self.endLabel.setWindowIcon(qtg.QIcon("assets/letter-h.png"))
+            fontBigger = qtg.QFont()
+            fontBigger.setFamilies(["MS Sans Serif"])
+            fontBigger.setPointSize(12)
+            self.endLabel.setFont(fontBigger)
+            self.endLabel.setAlignment(qtc.Qt.AlignmentFlag.AlignCenter)
+            self.endLabel.setStyleSheet("background-color: rgb(0, 170, 0);\n"
+                                        "border: 2px solid white;\n"
+                                        "border-radius: 5px;")
+            self.endLabel.show()
     
     #Check the win condition
     def checkWon(self):
@@ -149,5 +168,21 @@ class window(qtw.QWidget):
         if guessedCheck == self.word:
             self.enterLetter.setReadOnly(True)
 
+            #Calculate score
+            end = time.time()
+            self.score = round(numpy.reciprocal(end - self.start) * 1000)
 
-    
+            #Display score
+            self.scoreLabel = qtw.QLabel("--YOU WON--\nYour score: {}".format(self.score))
+            self.scoreLabel.setGeometry(qtc.QRect(120, 140, 221, 221))
+            self.scoreLabel.setWindowTitle("WINNER")
+            self.scoreLabel.setWindowIcon(qtg.QIcon("assets/letter-h.png"))
+            fontBigger = qtg.QFont()
+            fontBigger.setFamilies(["MS Sans Serif"])
+            fontBigger.setPointSize(12)
+            self.scoreLabel.setFont(fontBigger)
+            self.scoreLabel.setAlignment(qtc.Qt.AlignmentFlag.AlignCenter)
+            self.scoreLabel.setStyleSheet("background-color: rgb(0, 170, 0);\n"
+                                        "border: 2px solid white;\n"
+                                        "border-radius: 5px;")
+            self.scoreLabel.show()       

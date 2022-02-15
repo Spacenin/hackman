@@ -3,6 +3,7 @@ import window
 import getWord
 
 word = getWord.getWord()
+print(word)
 
 def start(app):
     #Start up main window
