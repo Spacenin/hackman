@@ -1,4 +1,6 @@
-from socketserver import ThreadingUDPServer
+#from socketserver import ThreadingUDPServer
+#Idk why that^ was there, I dont remember putting it so ¯\_(ツ)_/¯
+
 from PyQt6 import QtWidgets as qtw
 from PyQt6 import QtCore as qtc
 from PyQt6 import QtGui as qtg
@@ -6,6 +8,7 @@ import time
 import numpy
 import game
 
+#Restart exit code constant
 EXIT_CODE_REBOOT = 618491
 
 class window(qtw.QWidget):
@@ -95,6 +98,7 @@ class window(qtw.QWidget):
                                             "border: 2px solid white;\n"
                                             "border-radius: 5px;")
 
+        #Get time of program start
         self.start = time.time()
 
         self.show()
@@ -165,6 +169,7 @@ class window(qtw.QWidget):
 
             self.checkWon()
 
+        #The word is one single guess only
         else:
             self.status = 5
 
@@ -202,6 +207,7 @@ class window(qtw.QWidget):
                                         "border: 2px solid white;\n"
                                         "border-radius: 5px;")
 
+            #Restart button
             self.restartEnd = qtw.QPushButton("Restart?", self.endLabel)
             self.restartEnd.setFont(fontBigger)
             self.restartEnd.clicked.connect(self.restart)
@@ -240,6 +246,7 @@ class window(qtw.QWidget):
                                         "border: 2px solid white;\n"
                                         "border-radius: 5px;")
 
+            #Create restart button
             self.restartScore = qtw.QPushButton("Restart?", self.scoreLabel)
             self.restartScore.setFont(fontBigger)
             self.restartScore.clicked.connect(self.restart)

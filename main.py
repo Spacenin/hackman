@@ -4,6 +4,7 @@ import game
 import window
 
 def main():
+    #Exit code constant that allows user to restart program
     EXIT_CODE_REBOOT = 618491
     exitCodeCurrent = EXIT_CODE_REBOOT
 
