@@ -1,6 +1,10 @@
 # hackman 
 Hangman game and project created for the Clemson CPSC Discord Hackman challenge!
 
+## NOTE
+In order to run this, you must have a key.txt file in the same directory with your API key.
+
+## Programmer's Aside
 Things I Learned:
 - True Python OOP: I had to use classes to create the window and multiple files, was very interesting, I don't think I like it better than Java/C++
 - Qt: GUI framework primarily for C++, but also used in other languages, this helped a lot
@@ -26,5 +30,5 @@ should've been more streamlined, so I will try to improve that moving forward on
 - More Efficient Code: This program as it is now is very slow, so in the future I need to work on 
 making my programs more efficient (goes along with point above)
 
-Attributions:
+## Attributions
 1. [H Logo](https://www.flaticon.com/premium-icon/letter-h_3097026?term=h&page=1&position=7&page=1&position=7&related_id=3097026&origin=search)
