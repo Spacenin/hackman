@@ -2,7 +2,8 @@
 Hangman game and project created for the Clemson CPSC Discord Hackman challenge!
 
 ## NOTE
-In order to run this, you must have a key.txt file in the same directory with your API key.
+In order to run this, you must have a key.txt file in the same directory with your API key.  
+Run by "python main.py" within directory.
 
 ## Programmer's Aside
 Things I Learned:
