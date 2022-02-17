@@ -4,9 +4,15 @@ import game
 import window
 
 def main():
-    app = qtw.QApplication([])
-    #Start up game window within application
-    game.start(app)
+    EXIT_CODE_REBOOT = 618491
+    exitCodeCurrent = EXIT_CODE_REBOOT
+
+    while (exitCodeCurrent == EXIT_CODE_REBOOT):
+        app = qtw.QApplication([])
+        #Start up game window within application
+        exitCodeCurrent = game.game().start(app)
+
+        app = None
 
 if __name__ == "__main__":
     main()

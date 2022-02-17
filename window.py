@@ -6,6 +6,8 @@ import time
 import numpy
 import game
 
+EXIT_CODE_REBOOT = 618491
+
 class window(qtw.QWidget):
     def __init__(self, word):
         self.word = word
@@ -102,7 +104,8 @@ class window(qtw.QWidget):
         #Get letter entered
         letter = self.enterLetter.text().lower()
 
-        if letter == "":
+        #Check that its not just whitespace
+        if letter == "" or letter == " ":
             return
 
         guessed = self.guessedLabel.text()
@@ -112,7 +115,7 @@ class window(qtw.QWidget):
         self.enterLetter.setAlignment(qtc.Qt.AlignmentFlag.AlignCenter)
 
         #Check if it is right
-        guessedCheck = game.checkLetter(guessed, letter)
+        guessedCheck = game.game.checkLetter(guessed, letter, self.word)
         
         #If the check if unchanged, add to incorrect, otherwise add to correct
         if guessedCheck == guessed:
@@ -153,7 +156,7 @@ class window(qtw.QWidget):
     #Check if full word is right
     def checkWord(self):
         #Get word in text box
-        guessed = self.enterLetter.text().lower()
+        guessed = self.enterLetter.text().lower().strip()
 
         if guessed == self.word:
             self.guessedLabel.setText(guessed)
@@ -181,7 +184,7 @@ class window(qtw.QWidget):
         elif self.status == 4:
             self.imageSeen.setPixmap(qtg.QPixmap("assets/four.png"))
         elif self.status == 5:
-            self.imageSeen.setPixmap(qtg.QPixmap("assets/five.png"))
+            self.imageSeen.setPixmap(qtg.QPixmap("assets/death.png"))
 
             self.enterLetter.setReadOnly(True)
 
@@ -198,6 +201,14 @@ class window(qtw.QWidget):
             self.endLabel.setStyleSheet("background-color: rgb(0, 170, 0);\n"
                                         "border: 2px solid white;\n"
                                         "border-radius: 5px;")
+
+            self.restartEnd = qtw.QPushButton("Restart?", self.endLabel)
+            self.restartEnd.setFont(fontBigger)
+            self.restartEnd.clicked.connect(self.restart)
+            self.restartEnd.setStyleSheet("background-color: rgb(0, 255, 0);\n"
+                                        "border: 2px solid white;\n"
+                                        "border-radius: 5px;")
+
             self.endLabel.show()
     
     #Check the win condition
@@ -228,6 +239,14 @@ class window(qtw.QWidget):
             self.scoreLabel.setStyleSheet("background-color: rgb(0, 170, 0);\n"
                                         "border: 2px solid white;\n"
                                         "border-radius: 5px;")
+
+            self.restartScore = qtw.QPushButton("Restart?", self.scoreLabel)
+            self.restartScore.setFont(fontBigger)
+            self.restartScore.clicked.connect(self.restart)
+            self.restartScore.setStyleSheet("background-color: rgb(0, 255, 0);\n"
+                                        "border: 2px solid white;\n"
+                                        "border-radius: 5px;")
+                    
             self.scoreLabel.show()
 
     #Close all windows on close
@@ -241,3 +260,7 @@ class window(qtw.QWidget):
             self.endLabel.close()
         except AttributeError:
             pass
+
+    #Allows user to restart application on button push
+    def restart(self):
+        return(qtw.QApplication.exit(EXIT_CODE_REBOOT))
