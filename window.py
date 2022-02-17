@@ -36,7 +36,7 @@ class window(qtw.QWidget):
         #Setup window
         self.setGeometry(0, 0, 439, 397)
         self.setStyleSheet("background-color: rgb(0, 0, 0);")
-        self.setWindowTitle("hackman")
+        self.setWindowTitle("Spacenin's Hackman!")
         self.setWindowIcon(qtg.QIcon("assets/letter-h.png"))
 
         #Hangman image

@@ -21,6 +21,7 @@ before starting on these projects
 better GUIs from scratch, as opposed to jumping in from nothing
 - Using More Generalized Variables: In this there were a lot of repeated strings/functionality that 
 should've been more streamlined, so I will try to improve that moving forward on bigger projects
+- More Efficient Code: This program as it is now is very slow, so in the future I need to work on making my programs more efficient
 
 Attributions:
 1. [H Logo](https://www.flaticon.com/premium-icon/letter-h_3097026?term=h&page=1&position=7&page=1&position=7&related_id=3097026&origin=search)
